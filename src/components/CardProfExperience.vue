@@ -8,9 +8,10 @@
         </header>
         <div class="z-10 sm:col-span-6">
           <div class="font-medium leading-snug text-slate-200">
-            <div class="flex flex-row gap-2 flex-wrap">
+            <div class="flex flex-row gap-4 flex-wrap">
               <div>{{ props.position }}</div>
-              <div v-if="!props.companyLink">{{ props.company }}</div>
+              <div class="inline-flex items-baseline font-medium leading-tight lg:text-slate-200 text-emerald
+                          focus-visible:text-teal-300 text-base" v-if="!props.companyLink">{{ props.company }}</div>
               <a v-else
                  class="inline-flex items-baseline font-medium leading-tight lg:text-slate-200 text-emerald
                         hover:text-emerald focus-visible:text-teal-300 text-base"

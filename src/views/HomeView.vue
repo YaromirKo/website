@@ -19,9 +19,10 @@
           </p>
         </section>
         <nav class="flex flex-col lg:gap-4 gap-2 lg:mt-24 mt-2  text-emerald">
-          <RouterLink v-for="(item, id) in homeConfig.pages" :key="id"
+          <RouterLink v-for="(item, id) in Object.keys(homeConfig.pages)" :key="id"
                       :to="item"
-                      class="uppercase hover:underline">
+                      class="uppercase"
+                      :class="[$route.name === item && 'underline']">
             {{ item.split("-").join(" ") }}
           </RouterLink>
         </nav>
@@ -32,14 +33,7 @@
     </header>
 
     <div class="lg:w-2/3 lg:py-24 py-6 flex flex-col justify-between">
-      <CardProfExperience v-for="(item, id) in homeConfig.experience" :key="id"
-                          :start-date="item.startDate"
-                          :end-date="item.endDate"
-                          :position="item.position"
-                          :company="item.company"
-                          :company-link="item.companyLink"
-                          :description="item.description"
-                          :tags="item.tags"/>
+      <RouterView />
       <footer class="">
         Built with
         <Link name="Vue.js" link="https://vuejs.org/" />
@@ -60,7 +54,6 @@
 <script setup>
 import Link from "@/components/Link.vue";
 import FooterSocial from "@/components/FooterSocial.vue";
-import CardProfExperience from '../components/CardProfExperience.vue'
 import { RouterLink } from "vue-router";
 import homeConfig from '@/stores/home'
 
