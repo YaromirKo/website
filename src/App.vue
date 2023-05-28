@@ -10,6 +10,7 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
+document.body.style.overflowX = 'hidden'
 </script>
 
 

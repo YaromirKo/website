@@ -36,7 +36,11 @@
     </header>
 
     <div class="lg:w-3/4 lg:py-24 py-6 flex flex-col justify-between">
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition name="slide-inner" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
       <footer class="">
         Built with
         <Link name="Vue.js" link="https://vuejs.org/" />
@@ -57,7 +61,7 @@
 <script setup>
 import Link from "@/components/Link.vue";
 import FooterSocial from "@/components/FooterSocial.vue";
-import { RouterLink } from "vue-router";
+import {RouterLink, RouterView} from "vue-router";
 import homeConfig from '@/stores/home';
 import Regions from '@/stores/regions-to-countries.json';
 
@@ -67,3 +71,15 @@ const dateRange = startYear === currentYear ? startYear : `${startYear} - ${curr
 const currentRegion = Intl.DateTimeFormat().resolvedOptions().timeZone
 const isCanada = Regions[currentRegion] === 'Canada'
 </script>
+
+<style scoped>
+.slide-inner-enter-active,
+.slide-inner-leave-active {
+  transition: opacity 0.9s, transform 0.9s;
+}
+.slide-inner-enter-from,
+.slide-inner-leave-to {
+  opacity: 0;
+  transform: translateX(30%);
+}
+</style>
