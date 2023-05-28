@@ -4,6 +4,7 @@
                         :start-date="item.startDate"
                         :end-date="item.endDate"
                         :position="item.position"
+                        :sub-position="item.subPosition"
                         :company="item.company"
                         :company-link="item.companyLink"
                         :description="item.description"

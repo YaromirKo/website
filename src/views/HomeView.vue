@@ -8,12 +8,15 @@
                    flex flex-col justify-between">
       <div>
         <section>
-          <h1 class="text-4lg font-bold tracking-tight text-slate-200 sm:text-5xl">
+          <h1 class="font-bold tracking-tight text-slate-200 sm:text-5xl text-4xl">
             {{ homeConfig.fullName }}
           </h1>
           <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-lg">
             {{ homeConfig.position }}
           </h2>
+          <p class="mt-2 max-w-xs leading-normal" v-if="isCanada && Object.keys(homeConfig.noc).length !== 0">
+            (NOC <a class="text-emerald" :href="homeConfig.noc.webDeveloper">21234</a> | <a class="text-emerald" :href="homeConfig.noc.dataScientist">21211</a>)
+          </p>
           <p class="mt-4 max-w-xs leading-normal">
             {{ homeConfig.subDescription }}
           </p>
@@ -55,9 +58,12 @@
 import Link from "@/components/Link.vue";
 import FooterSocial from "@/components/FooterSocial.vue";
 import { RouterLink } from "vue-router";
-import homeConfig from '@/stores/home'
+import homeConfig from '@/stores/home';
+import Regions from '@/stores/regions-to-countries.json';
 
 const startYear = 2023
 const currentYear = new Date().getFullYear()
 const dateRange = startYear === currentYear ? startYear : `${startYear} - ${currentYear}`
+const currentRegion = Intl.DateTimeFormat().resolvedOptions().timeZone
+const isCanada = Regions[currentRegion] === 'Canada'
 </script>

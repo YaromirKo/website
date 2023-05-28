@@ -24,6 +24,9 @@
               {{ props.company }}
             </a>
           </div>
+          <div class="text-slate-500" v-if="props.subPosition">
+            {{ props.subPosition }}
+          </div>
         </div>
         <p class="mt-2 text-base leading-normal">
           {{ props.description }}
@@ -47,6 +50,10 @@ const props = defineProps({
     default: 'Current'
   },
   position: {
+    type: String,
+    default: ''
+  },
+  subPosition: {
     type: String,
     default: ''
   },
