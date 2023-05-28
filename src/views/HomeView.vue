@@ -18,7 +18,7 @@
             {{ homeConfig.subDescription }}
           </p>
         </section>
-        <nav class="flex flex-col lg:gap-4 gap-2 lg:mt-24 mt-2  text-emerald">
+        <nav class="flex flex-col lg:gap-4 gap-2 lg:mt-24 mt-2 text-emerald">
           <RouterLink v-for="(item, id) in Object.keys(homeConfig.pages)" :key="id"
                       :to="item"
                       class="uppercase"
@@ -32,7 +32,7 @@
       <FooterSocial :data="homeConfig.socialLinks" />
     </header>
 
-    <div class="lg:w-2/3 lg:py-24 py-6 flex flex-col justify-between">
+    <div class="lg:w-3/4 lg:py-24 py-6 flex flex-col justify-between">
       <RouterView />
       <footer class="">
         Built with

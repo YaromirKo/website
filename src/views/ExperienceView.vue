@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CardProfExperience v-for="(item, id) in homeConfig.pages.experience" :key="id"
+    <CardExperience v-for="(item, id) in homeConfig.pages.experience" :key="id"
                         :start-date="item.startDate"
                         :end-date="item.endDate"
                         :position="item.position"
@@ -13,7 +13,7 @@
 
 <script setup>
 import homeConfig from "@/stores/home";
-import CardProfExperience from "@/components/CardProfExperience.vue";
+import CardExperience from "@/components/CardExperience.vue";
 </script>
 
 <style scoped>
