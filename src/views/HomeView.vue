@@ -1,27 +1,19 @@
 <template>
-  <div class="mx-auto lg:max-w-[80%] max-w-full
-              lg:px-24 px-6 lg:py-0 py-12
+  <div class="mx-auto xl:max-w-[80%] max-w-full
+              lg:px-24 px-6 lg:py-0 py-22
               lg:min-h-screen
               flex lg:flex-row flex-col justify-center gap-[24px]">
-    <header class="lg:sticky lg:top-0 lg:py-24 py-6
-                   lg:max-h-screen lg:w-1/3
-                   flex flex-col justify-between">
+    <div class="lg:sticky lg:top-0 lg:py-16 py-6
+                   overflow-auto scrollbar-invisible
+                   lg:max-h-screen xl:w-1/3 lg:w-2/5
+                   flex flex-col justify-start">
       <div>
         <section>
-          <h1 class="font-bold tracking-tight text-slate-200 sm:text-5xl text-4xl">
+          <h1 class="font-medium tracking-tight text-slate-200 text-4xl">
             {{ homeConfig.fullName }}
           </h1>
-          <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-lg">
-            {{ homeConfig.position }}
-          </h2>
-          <p class="mt-2 max-w-xs leading-normal" v-if="isCanada && Object.keys(homeConfig.noc).length !== 0">
-            (NOC <a class="text-emerald" :href="homeConfig.noc.webDeveloper">21234</a> | <a class="text-emerald" :href="homeConfig.noc.dataScientist">21211</a>)
-          </p>
-          <p class="mt-4 max-w-xs leading-normal">
-            {{ homeConfig.subDescription }}
-          </p>
         </section>
-        <nav class="flex flex-col lg:gap-4 gap-2 lg:mt-24 mt-2 text-emerald">
+        <nav class="flex flex-col lg:gap-4 gap-2 mt-10 text-emerald">
           <RouterLink v-for="(item, id) in Object.keys(homeConfig.pages)" :key="id"
                       :to="item"
                       class="uppercase"
@@ -29,13 +21,11 @@
             {{ item.split("-").join(" ") }}
           </RouterLink>
         </nav>
-
       </div>
+      <SocialBlock :data="homeConfig.socialLinks" />
+    </div>
 
-      <FooterSocial :data="homeConfig.socialLinks" />
-    </header>
-
-    <div class="lg:w-3/4 lg:py-24 py-6 flex flex-col justify-between">
+    <div class="xl:w-3/4 lg:w-3/5 lg:py-16 py-6 flex flex-col justify-between">
       <router-view v-slot="{ Component }">
         <transition name="slide-inner" mode="out-in">
           <component :is="Component" />
@@ -60,16 +50,14 @@
 
 <script setup>
 import Link from "@/components/Link.vue";
-import FooterSocial from "@/components/FooterSocial.vue";
 import {RouterLink, RouterView} from "vue-router";
 import homeConfig from '@/stores/home';
-import Regions from '@/stores/regions-to-countries.json';
+import SocialBlock from "@/components/SocialBlock.vue";
 
 const startYear = 2023
 const currentYear = new Date().getFullYear()
 const dateRange = startYear === currentYear ? startYear : `${startYear} - ${currentYear}`
-const currentRegion = Intl.DateTimeFormat().resolvedOptions().timeZone
-const isCanada = Regions[currentRegion] === 'Canada'
+
 </script>
 
 <style scoped>
